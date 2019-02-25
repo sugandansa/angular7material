@@ -1,0 +1,111 @@
+<div *ngIf="spinnerlab; else elseBlocks">
+<mat-spinner mode="indeterminate"></mat-spinner>
+</div>
+<ng-template #elseBlocks>
+<div>
+<div class="col-md-2">
+<!--<mat-form-field>
+  <input matInput [matDatepicker]="pickers" placeholder="FromDate" [(ngModel)]="FromDates">
+  <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+  <mat-datepicker #pickers></mat-datepicker>
+</mat-form-field>-->
+<mat-form-field>
+  <input matInput placeholder="FromDate"
+               [(ngModel)]="FromDates"
+               [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3">
+        <owl-date-time #dt3></owl-date-time>
+        </mat-form-field>
+</div>
+<div class="col-md-2">
+<!--<mat-form-field>
+  <input matInput [matDatepicker]="todates" placeholder="ToDate" [(ngModel)]="ToDates">
+  <mat-datepicker-toggle matSuffix [for]="todates"></mat-datepicker-toggle>
+  <mat-datepicker #todates></mat-datepicker>
+</mat-form-field>-->
+<mat-form-field>
+  <input matInput placeholder="ToDate"
+               [(ngModel)]="ToDates"
+               [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4">
+        <owl-date-time #dt4></owl-date-time>
+        </mat-form-field>
+</div>
+<div class="col-md-2">
+<mat-form-field>
+<input matInput placeholder="VisitId" type="number" [(ngModel)]="VisitId">
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<mat-form-field>
+<input matInput placeholder="BillNo" [(ngModel)]="BillNo">
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<mat-form-field>
+<input matInput placeholder="LabNo" type="number" [(ngModel)]="DeptId">
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<button mat-button matTooltip="Search the panding sample collection list" (click)="search()">Search</button>
+</div>
+</div>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="search">
+    </mat-form-field>
+<button mat-button (click)="save()">save</button>
+  </div>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSort>
+  <!-- Position Column -->
+  <ng-container matColumnDef="visitId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> LabNo </th>
+    <td mat-cell *matCellDef="let element"> {{element.visitId}} </td>
+  </ng-container>
+
+  
+   <ng-container matColumnDef="patientId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> PatientId </th>
+    <td mat-cell *matCellDef="let element"> {{element.patientId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="billedDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> DateTime </th>
+    <td mat-cell *matCellDef="let element"> {{element.billedDate | date:'dd/MM/yyyy hh:mm:ss a'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="patientName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient </th>
+    <td mat-cell *matCellDef="let element"> {{element.patientName}}(Age : {{element.age}}) </td>
+  </ng-container>
+<ng-container matColumnDef="clientName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ReferredBy </th>
+    <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="investName" hidden="true">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Lab investigation(s) </th>
+    <td mat-cell *matCellDef="let element"> {{element.investName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="tenentName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Collection Centre </th>
+    <td mat-cell *matCellDef="let element"> {{element.tenentName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="AmountDue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount Due </th>
+    <td mat-cell *matCellDef="let element"> {{element.AmountDue}} </td>
+  </ng-container>
+  <ng-container matColumnDef="EnterFindings">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Enter Findings </th>
+    <td mat-cell *matCellDef="let element"> {{element.EnterFindings}} <a [routerLink]="['/new1/new4',element.visitId]">Enter Findings</a> </td>
+  </ng-container>
+  <ng-container matColumnDef="View">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> View </th>
+    <td mat-cell *matCellDef="let element"> {{element.View}}<a [routerLink]="['/new1/new4',element.visitId]">View</a> </td>
+  </ng-container>
+  <ng-container matColumnDef="PDF">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> PDF </th>
+    <td mat-cell *matCellDef="let element"> {{element.PDF}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</ng-template>

@@ -1,0 +1,93 @@
+<div *ngIf="spinner; else elseBlock">
+<mat-spinner></mat-spinner>
+</div>
+<ng-template #elseBlock>
+<div>
+<div class="col-md-2">
+<!--<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="FromDate" [(ngModel)]="FromDate">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>-->
+
+<mat-form-field>
+        <input matInput placeholder="FromDate"
+               [(ngModel)]="FromDate" ng-model-options="{ timezone: 'utc' }"
+               [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+        <owl-date-time #dt></owl-date-time>
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<!--<mat-form-field>
+  <input matInput [matDatepicker]="todate" placeholder="ToDate" [(ngModel)]="ToDate">
+  <mat-datepicker-toggle matSuffix [for]="todate"></mat-datepicker-toggle>
+  <mat-datepicker #todate></mat-datepicker>
+</mat-form-field>-->
+<mat-form-field>
+        <input matInput placeholder="ToDate"
+               [(ngModel)]="ToDate"
+               [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+        <owl-date-time #dt2></owl-date-time>
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<mat-form-field>
+<input matInput type="number" placeholder="VisitId" [(ngModel)]="VisitId">
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<mat-form-field>
+<input matInput placeholder="BillNo" [(ngModel)]="BillNo">
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<mat-form-field>
+<input matInput type="number" placeholder="DeptId" [(ngModel)]="DeptId">
+</mat-form-field>
+</div>
+<div class="col-md-2">
+<button mat-button matTooltip="Search the panding sample collection list" (click)="search()">Search</button>
+</div>
+</div>
+<cdk-virtual-scroll-viewport class="example-viewport"  itemSize="100">
+<mat-accordion>
+  <div *cdkVirtualFor="let i of scrollingItems"  class="example-item">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+    {{i.sampleDescription}}
+      <!--<button mat-icon-button><mat-icon [ngStyle]="{'color':'red'}">add_circle</mat-icon>{{i.sampleDescription}}</button>-->
+      </mat-panel-title>
+      <mat-panel-description>
+        LabNo: {{i.visitId}} (PatientName: {{i.patient_Name}} Age: {{i.age}} ) 
+        
+        {{i.billedDate|date:'dd/MM/yyyy hh:mm:ss a'}} 
+        
+       (BilledLocation: {{i.tenentName}})
+      </mat-panel-description>
+        
+    </mat-expansion-panel-header>
+    <mat-form-field class="example-full-width">
+      <input matInput disabled placeholder="Investigation Name" value="
+     {{i.invest_Name}}">
+    </mat-form-field>
+     <mat-form-field>
+      <input matInput disabled placeholder="sample Name" value="
+     {{i.sampleDescription}}">
+    </mat-form-field>
+      <mat-form-field>
+      <input matInput disabled placeholder="container Name" value="
+     {{i.containerDescription}}">
+    </mat-form-field>
+   <mat-form-field>
+        <input matInput placeholder="Sample Collection Time"
+               value={{i.sampleCollectionTime}}
+               [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5">
+        <owl-date-time #dt5></owl-date-time>
+</mat-form-field>
+<button mat-button (click)='savesample(i.visitId,i.sampleCollectionTime)'>SAVE</button>
+  </mat-expansion-panel></div>
+  </mat-accordion>
+  
+</cdk-virtual-scroll-viewport>
+</ng-template>

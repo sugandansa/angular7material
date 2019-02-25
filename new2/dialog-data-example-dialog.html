@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Information</h1>
+<div mat-dialog-content>
+  <ul>
+    <li>
+      <span *ngIf="data.alert === 'true'">&#10003;</span> Sample Received Successfully
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.alert" cdkFocusInitial>Ok</button>
+</div>

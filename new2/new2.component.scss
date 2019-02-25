@@ -1,0 +1,57 @@
+.owl-dt-container {
+    display: block;
+    font-size: 16px;
+    font-size: 1.5rem;
+    background: #fff;
+    pointer-events: auto;
+    z-index: 1000;
+}
+
+.example-viewport {
+    height: 690px;
+    width: 1610px;
+    border: 2px solid burlywood;
+}
+
+.example-full-width {
+    width: 40%;
+}
+
+.example-item {
+    padding: 13px;
+    background: grey;
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.mat-expansion-indicator::after,
+.mat-expansion-panel-header-description {
+    color: blue($color: #000000);
+}
+
+.mat-expansion-panel-header-title {
+    color: darkorange;
+}
+
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after,
+.mat-input-element:disabled {
+    color: royalblue;
+}
+
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after,
+.mat-input-placeholder {
+    color: royalblue;
+}
+
+.mat-input-placeholder {
+    color: red;
+    font-size: 2em;
+}
+
+.mat-spinner {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 300px;
+    width: 50%;
+}
